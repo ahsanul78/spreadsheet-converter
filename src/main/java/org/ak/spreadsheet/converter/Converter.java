@@ -183,14 +183,15 @@ public class Converter {
     		        while (cellIterator.hasNext()) {
     		            cell = cellIterator.next();
     		            Object cellData = ConversionHelper.getCellValue(config, cell, evaluator);
-    		            if(cellData instanceof Number) { 
-    		            	rowObject.addProperty(columns.get(cellIndex), (Number)cellData);
-    		            } else if(cellData instanceof Boolean) {
-    		            	rowObject.addProperty(columns.get(cellIndex), (Boolean)cellData);
-    		            } else{
-    		            	rowObject.addProperty(columns.get(cellIndex), (String)cellData);
+    		            if(cellData != null) {
+	    		            if(cellData instanceof Number) { 
+	    		            	rowObject.addProperty(columns.get(cellIndex), (Number)cellData);
+	    		            } else if(cellData instanceof Boolean) {
+	    		            	rowObject.addProperty(columns.get(cellIndex), (Boolean)cellData);
+	    		            } else{
+	    		            	rowObject.addProperty(columns.get(cellIndex), (String)cellData);
+	    		            }
     		            }
-    		            
     		            cellIndex ++;
     		        }
                 	
@@ -205,7 +206,7 @@ public class Converter {
 		}
 		wbObject.add("sheets", sheetsArray);
 		
-		return wbObject.getAsString();
+		return wbObject.toString();
 	}
 	
 	private String convertWorkbookToXML(Workbook wb) throws InvalidSpreadSheetException, ParserConfigurationException, TransformerException {
@@ -250,6 +251,7 @@ public class Converter {
     		            cell = cellIterator.next();
     		            Object cellData = ConversionHelper.getCellValue(config, cell, evaluator);
     		            Element cellElem = doc.createElement(columns.get(cellIndex));
+    		            rowElement.appendChild(cellElem);
     		            cellElem.appendChild(doc.createTextNode(String.valueOf(cellData)));
     		            cellIndex ++;
     		        }
