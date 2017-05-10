@@ -1,9 +1,14 @@
 package org.ak.spreadsheet.converter;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.ak.spreadsheet.exceptions.InvalidSpreadSheetException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.Row;
 
 public class ConversionHelper {
 	
@@ -52,5 +57,26 @@ public class ConversionHelper {
         	return null;
         }
         	
+	}
+	
+	public static ArrayList<String> getColumnHeadings(ConverterConfig config, FormulaEvaluator evaluator, Row row) 
+			throws InvalidSpreadSheetException {
+		if(row != null) {
+			ArrayList<String> columns = new ArrayList<String>();
+			Cell cell;
+			Iterator<Cell> cellIterator = row.cellIterator();
+			while (cellIterator.hasNext()) {
+			    cell = cellIterator.next();
+			    Object cellData = ConversionHelper.getCellValue(config, cell, evaluator);
+			    if(cellData != null) {
+			    	columns.add(cellData.toString());
+			    } else{
+			    	throw new InvalidSpreadSheetException("Column heading is not present");
+			    }
+			}
+			return columns;
+		} else{
+			throw new InvalidSpreadSheetException("Column heading is not present");
+		}
 	}
 }
