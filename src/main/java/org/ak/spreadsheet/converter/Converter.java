@@ -31,6 +31,7 @@ import com.google.gson.JsonObject;
 
 public class Converter {
 
+	private static final String ROW = "row";
 	private static final String NEW_LINE_PATTERN = "\n|\r";
 	private static final String SHEET = "sheet";
 	private static final String WORKBOOK = "workbook";
@@ -242,7 +243,7 @@ public class Converter {
                 	// retrieve column names
                 	columns = ConversionHelper.getColumnHeadings(config, evaluator, row);
                 } else if(rowIndex > 0 && columns.size() > 0){
-                	Element rowElement = doc.createElement("entry");
+                	Element rowElement = doc.createElement(ROW);
                 	sheetElement.appendChild(rowElement);
 
                 	Iterator<Cell> cellIterator = row.cellIterator();
