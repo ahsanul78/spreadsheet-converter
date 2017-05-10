@@ -1,6 +1,6 @@
 # spreadsheet-converter
 
-This is a utility library for convering excel spreadsheets to CSV, JSON and XML. Created usinf Apache POI library. 
+This is a utility library for converting excel spreadsheets to CSV, JSON and XML. Created using Apache POI library. 
 
 ## Code Example
 
