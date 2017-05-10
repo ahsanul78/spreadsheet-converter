@@ -12,18 +12,18 @@ public static void main( String[] args )
     
     try {
     	String[] csvs = converter.toCSV("C://programs.xlsx");
-		System.out.println(csvs[0]);
+	System.out.println(csvs[0]);
+	
+	String xml = converter.toXML("C://programs.xlsx");
+	System.out.println(xml);
+	
+	String json = converter.toJSON("C://programs.xlsx");
+	System.out.println(json);
 		
-		String xml = converter.toXML("C://programs.xlsx");
-		System.out.println(xml);
 		
-		String json = converter.toJSON("C://programs.xlsx");
-		System.out.println(json);
-		
-		
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
+    } catch (Exception e) {
+	e.printStackTrace();
+    }
 }
 
 ```
